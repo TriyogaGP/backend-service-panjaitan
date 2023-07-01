@@ -330,8 +330,8 @@ function postBiodata (models) {
     try {
 			const { userID } = req.JWTDecoded
 			let kirimdataUser, kirimdataAnak = [];
-			let tglSplit = body.tanggalLahir.split('-')
 			if(body.jenis == 'ADD'){
+				let tglSplit = body.tanggalLahir.split('-')
 				const data = await models.Biodata.findOne({
 					attributes: ["nik"],
 					order: [
@@ -363,7 +363,7 @@ function postBiodata (models) {
 					komisarisWilayah: body.komisarisWilayah,
 					namaKetuaKomisaris: body.namaKetuaKomisaris,
 					ompu: body.ompu,
-					statusMeninggal: 0,
+					statusMeninggal: body.statusMeninggal,
 					statusBiodata: 1,
 					createBy: userID,
 				}
@@ -381,6 +381,7 @@ function postBiodata (models) {
 					await models.Anak.bulkCreate(kirimdataAnak, { transaction: trx })
 				})
 			}else if(body.jenis == 'EDIT'){
+				let tglSplit = body.tanggalLahir.split('-')
 				const data = await models.Biodata.findOne({
 					where: {
 						idBiodata: body.idBiodata,
@@ -412,7 +413,7 @@ function postBiodata (models) {
 					komisarisWilayah: body.komisarisWilayah,
 					namaKetuaKomisaris: body.namaKetuaKomisaris,
 					ompu: body.ompu,
-					statusMeninggal: 0,
+					statusMeninggal: body.statusMeninggal,
 					statusBiodata: 1,
 					updateBy: userID,
 				}

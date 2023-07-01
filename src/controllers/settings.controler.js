@@ -30,6 +30,9 @@ function updateFile (models) {
 			if(body.table == 'Admin'){
 				kirimdata = { fotoProfil: body.nama_folder+'/'+body.namaFile }
 				await models.Admin.update(kirimdata, { where: { idAdmin: body.UserID } })
+			}else if(body.table == 'Biodata'){
+				kirimdata = { fotoProfil: body.nama_folder+'/'+body.namaFile }
+				await models.Biodata.update(kirimdata, { where: { idBiodata: body.UserID } })
 			}
 			return OK(res, body);
     } catch (err) {
