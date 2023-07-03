@@ -185,10 +185,21 @@ function profile (models) {
   }  
 }
 
+function authToken (models) {
+  return async (req, res, next) => {
+    try {
+			return OK(res, req.JWTDecoded);
+    } catch (err) {
+			return NOT_FOUND(res, err.message)
+    }
+  }  
+}
+
 module.exports = {
   login,
 	forgotPass,
   ubahKataSandi,
   ubahProfile,
   profile,
+  authToken,
 }
